@@ -87,20 +87,20 @@ function LoginForm() {
       </div>
 
       {/* Right Panel - Login Form */}
-      <div className="flex-1 flex items-center justify-center p-6 sm:p-12 bg-gradient-to-br from-slate-50 to-slate-100">
+      <div className="flex-1 flex items-center justify-center p-6 sm:p-12 bg-gradient-to-br from-slate-50 to-slate-100 dark:from-slate-950 dark:to-slate-900">
         <div className="w-full max-w-md animate-fade-in">
           {/* Mobile Logo */}
           <div className="flex items-center gap-3 mb-8 lg:hidden">
-            <div className="p-2.5 bg-indigo-600 rounded-xl">
+            <div className="p-2.5 bg-indigo-600 rounded-xl shadow-lg shadow-indigo-200 dark:shadow-none">
               <Gamepad2 className="h-6 w-6 text-white" />
             </div>
-            <h1 className="text-2xl font-bold text-gray-900">Mabar</h1>
+            <h1 className="text-2xl font-bold text-slate-900 dark:text-white">Mabar</h1>
           </div>
 
-          <Card className="shadow-xl border-0 bg-white/80 backdrop-blur-sm">
+          <Card className="shadow-xl border-0 bg-white/80 dark:bg-slate-900/80 backdrop-blur-md border-slate-200 dark:border-slate-800">
             <CardHeader className="space-y-2 pb-4">
-              <CardTitle className="text-2xl font-bold text-gray-900">Masuk</CardTitle>
-              <CardDescription className="text-base text-gray-500">
+              <CardTitle className="text-2xl font-bold text-slate-900 dark:text-white">Masuk</CardTitle>
+              <CardDescription className="text-base text-slate-500 dark:text-slate-400">
                 Masukkan email dan password untuk melanjutkan
               </CardDescription>
             </CardHeader>
@@ -108,21 +108,21 @@ function LoginForm() {
               <form onSubmit={handleLogin} className="space-y-5">
                 {/* Error Message */}
                 {error && (
-                  <div className="p-3 bg-red-50 border border-red-200 rounded-lg animate-fade-in">
-                    <p className="text-sm text-red-600">{error}</p>
+                  <div className="p-3 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800/50 rounded-lg animate-fade-in">
+                    <p className="text-sm text-red-600 dark:text-red-400 font-medium">{error}</p>
                   </div>
                 )}
 
                 {/* Email */}
                 <div className="space-y-2">
-                  <Label htmlFor="email" className="text-gray-700 font-medium">Email</Label>
+                  <Label htmlFor="email" className="text-slate-700 dark:text-slate-300 font-medium">Email</Label>
                   <div className="relative">
-                    <Mail className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-400" />
+                    <Mail className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-400 dark:text-slate-500" />
                     <Input
                       id="email"
                       type="email"
                       placeholder="nama@email.com"
-                      className="pl-10 h-11 bg-white border-gray-200 focus:border-indigo-500 focus:ring-indigo-500"
+                      className="pl-10 h-11 bg-white dark:bg-slate-800 border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white focus:border-indigo-500 focus:ring-indigo-500 transition-colors"
                       value={formData.email}
                       onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                       required
@@ -133,14 +133,14 @@ function LoginForm() {
 
                 {/* Password */}
                 <div className="space-y-2">
-                  <Label htmlFor="password" className="text-gray-700 font-medium">Password</Label>
+                  <Label htmlFor="password" className="text-slate-700 dark:text-slate-300 font-medium">Password</Label>
                   <div className="relative">
-                    <Lock className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-400" />
+                    <Lock className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-400 dark:text-slate-500" />
                     <Input
                       id="password"
                       type="password"
                       placeholder="••••••••"
-                      className="pl-10 h-11 bg-white border-gray-200 focus:border-indigo-500 focus:ring-indigo-500"
+                      className="pl-10 h-11 bg-white dark:bg-slate-800 border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white focus:border-indigo-500 focus:ring-indigo-500 transition-colors"
                       value={formData.password}
                       onChange={(e) => setFormData({ ...formData, password: e.target.value })}
                       required
@@ -154,7 +154,7 @@ function LoginForm() {
                 <Button
                   type="submit"
                   disabled={isLoading}
-                  className="w-full h-11 bg-indigo-600 hover:bg-indigo-700 text-white font-medium transition-all duration-200 shadow-lg shadow-indigo-200 hover:shadow-indigo-300"
+                  className="w-full h-11 bg-indigo-600 hover:bg-indigo-700 dark:bg-indigo-500 dark:hover:bg-indigo-600 text-white font-medium transition-all duration-200 shadow-lg shadow-indigo-200 dark:shadow-none hover:shadow-indigo-300 transform active:scale-[0.98]"
                 >
                   {isLoading ? (
                     <>
@@ -168,12 +168,12 @@ function LoginForm() {
               </form>
 
               {/* Register Link */}
-              <div className="mt-6 text-center">
-                <p className="text-sm text-gray-500">
+              <div className="mt-6 text-center border-t border-slate-100 dark:border-slate-800 pt-6">
+                <p className="text-sm text-slate-500 dark:text-slate-400">
                   Belum punya akun?{' '}
                   <Link
                     href={`/register${returnTo !== '/projects' ? `?returnTo=${encodeURIComponent(returnTo)}` : ''}`}
-                    className="text-indigo-600 hover:text-indigo-700 font-semibold hover:underline transition-colors"
+                    className="text-indigo-600 dark:text-indigo-400 hover:text-indigo-700 dark:hover:text-indigo-300 font-semibold hover:underline transition-colors"
                   >
                     Daftar sekarang
                   </Link>
@@ -183,7 +183,7 @@ function LoginForm() {
           </Card>
 
           {/* Footer */}
-          <p className="text-center text-xs text-gray-400 mt-6">
+          <p className="text-center text-xs text-slate-400 dark:text-slate-600 mt-6 font-medium">
             &copy; 2026 Mabar. Built for streamers.
           </p>
         </div>
@@ -195,8 +195,8 @@ function LoginForm() {
 export default function LoginPage() {
   return (
     <Suspense fallback={
-      <div className="min-h-screen flex items-center justify-center bg-slate-50">
-        <Loader2 className="h-8 w-8 animate-spin text-indigo-600" />
+      <div className="min-h-screen flex items-center justify-center bg-slate-50 dark:bg-slate-950">
+        <Loader2 className="h-8 w-8 animate-spin text-indigo-600 dark:text-indigo-500" />
       </div>
     }>
       <LoginForm />

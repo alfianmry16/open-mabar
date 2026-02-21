@@ -1,7 +1,7 @@
 "use client"
 
 import Link from 'next/link'
-import { LogOut, User, Settings, LayoutGrid } from 'lucide-react'
+import { LogOut, User, LayoutGrid } from 'lucide-react'
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -51,12 +51,6 @@ export function ProfileDropdown({ displayName, email }: ProfileDropdownProps) {
             <Link href="/settings" className="cursor-pointer">
               <User className="mr-2 h-4 w-4" />
               <span>Menu Profil</span>
-            </Link>
-          </DropdownMenuItem>
-          <DropdownMenuItem asChild>
-            <Link href="/settings" className="cursor-pointer">
-              <Settings className="mr-2 h-4 w-4" />
-              <span>Pengaturan</span>
             </Link>
           </DropdownMenuItem>
         </DropdownMenuGroup>
