@@ -1,0 +1,1 @@
+﻿app/(dashboard)/projects/page.tsx(55,14): error TS7006: Parameter 'p' implicitly has an 'any' type.
