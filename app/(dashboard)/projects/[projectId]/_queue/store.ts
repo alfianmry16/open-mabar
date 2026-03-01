@@ -43,6 +43,11 @@ interface QueueState {
   vipFilter: 'all' | 'vip' | 'regular'
   addForm: AddForm
 
+  // Import state
+  showImportModal: boolean
+  isImporting: boolean
+  importError: string | null
+
   // Actions
   init: (project: Project, initialEntries: QueueEntry[], projectRoles: ProjectRole[], isOwner: boolean) => void
   refetchEntries: () => Promise<void>
@@ -65,6 +70,11 @@ interface QueueState {
   resetAddForm: () => void
   toggleProjectStatus: () => Promise<void>
   setError: (error: string | null) => void
+
+  // Import actions
+  setShowImportModal: (show: boolean) => void
+  setImportError: (error: string | null) => void
+  importPlayers: (rows: { game_id: string; display_name: string; games_requested: number; is_fast_track: boolean }[]) => Promise<number>
 }
 
 export const useQueueStore = create<QueueState>((set, get) => ({
@@ -84,6 +94,11 @@ export const useQueueStore = create<QueueState>((set, get) => ({
   searchQuery: '',
   vipFilter: 'all',
   addForm: { ...defaultAddForm },
+
+  // Import state
+  showImportModal: false,
+  isImporting: false,
+  importError: null,
 
   // Actions
   init: (project, initialEntries, projectRoles, isOwner) => {
@@ -265,6 +280,53 @@ export const useQueueStore = create<QueueState>((set, get) => ({
   },
 
   setError: (error) => set({ error }),
+
+  // Import actions
+  setShowImportModal: (show) => set({ showImportModal: show, importError: null }),
+  setImportError: (error) => set({ importError: error }),
+
+  importPlayers: async (rows) => {
+    const { project, entries } = get()
+    if (!project) return 0
+
+    set({ isImporting: true, importError: null })
+    let successCount = 0
+
+    try {
+      for (const row of rows) {
+        const activeEntry = entries.find(
+          (e) => e.game_id === row.game_id.trim() && e.status !== 'done'
+        )
+
+        if (activeEntry) {
+          // Already in queue: bump games_requested
+          await (supabase.from('queue_entries') as any)
+            .update({
+              games_requested: activeEntry.games_requested + (project.is_repeatable ? row.games_requested : 1)
+            } as Database['public']['Tables']['queue_entries']['Update'])
+            .eq('id', activeEntry.id)
+        } else {
+          await (supabase.from('queue_entries') as any).insert({
+            project_id: project.id,
+            game_id: row.game_id.trim(),
+            display_name: row.display_name.trim() || null,
+            games_requested: project.is_repeatable ? row.games_requested : 1,
+            is_fast_track: project.has_fast_track ? row.is_fast_track : false,
+            role_ids: null,
+            status: 'waiting',
+          } as Database['public']['Tables']['queue_entries']['Insert'])
+        }
+        successCount++
+      }
+
+      await get().refetchEntries()
+    } catch {
+      set({ importError: 'Gagal mengimport beberapa data. Coba lagi.' })
+    }
+
+    set({ isImporting: false })
+    return successCount
+  },
 }))
 
 // ── Stable derived-data hooks (shallow-compared, no infinite loops) ──

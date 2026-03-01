@@ -34,6 +34,60 @@ export function Sidebar() {
 
   return (
     <div className="space-y-5">
+
+      {/* Leaderboard */}
+      {(() => {
+        interface LeaderboardPlayer {
+          name: string
+          totalGames: number
+          id: string
+        }
+
+        // Group entries by game_id and sum games_played
+        const leaderboardData = (entries || []).reduce((acc: Record<string, LeaderboardPlayer>, entry) => {
+          if (!entry.game_id || entry.games_played === 0) return acc
+          const id = entry.game_id
+          if (!acc[id]) {
+            acc[id] = {
+              name: getPlayerName(entry),
+              totalGames: 0,
+              id: entry.id
+            }
+          }
+          acc[id].totalGames += entry.games_played
+          return acc
+        }, {})
+
+        const topPlayers = Object.values(leaderboardData)
+          .sort((a, b) => b.totalGames - a.totalGames)
+          .slice(0, 5)
+
+        if (topPlayers.length === 0) return null
+
+        return (
+          <div className="bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 p-5">
+            <h3 className="flex items-center gap-2 font-bold text-slate-900 dark:text-white mb-3">
+              <Crown className="h-4 w-4 text-amber-500" />
+              Leaderboard
+            </h3>
+            <div className="space-y-2">
+              {topPlayers.map((player, i) => (
+                <div key={player.id} className="flex items-center justify-between text-sm gap-2">
+                  <div className="flex items-center gap-2 min-w-0">
+                    <span className={`w-5 h-5 rounded-full flex items-center justify-center text-[10px] font-bold shrink-0 ${i === 0 ? 'bg-amber-100 text-amber-700' :
+                      i === 1 ? 'bg-slate-200 text-slate-600' :
+                        i === 2 ? 'bg-orange-100 text-orange-700' :
+                          'bg-slate-100 text-slate-500'
+                      }`}>{i + 1}</span>
+                    <span className="font-medium text-slate-700 dark:text-slate-300 truncate">{player.name}</span>
+                  </div>
+                  <span className="text-xs text-slate-400 shrink-0">{player.totalGames} game</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        )
+      })()}
       {/* Owner Info */}
       <div className="bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 p-5">
         <h3 className="font-bold text-slate-900 dark:text-white mb-3">Project Owner</h3>
@@ -119,59 +173,6 @@ export function Sidebar() {
         </div>
       )}
 
-      {/* Leaderboard */}
-      {(() => {
-        interface LeaderboardPlayer {
-          name: string
-          totalGames: number
-          id: string
-        }
-
-        // Group entries by game_id and sum games_played
-        const leaderboardData = (entries || []).reduce((acc: Record<string, LeaderboardPlayer>, entry) => {
-          if (!entry.game_id || entry.games_played === 0) return acc
-          const id = entry.game_id
-          if (!acc[id]) {
-            acc[id] = {
-              name: getPlayerName(entry),
-              totalGames: 0,
-              id: entry.id
-            }
-          }
-          acc[id].totalGames += entry.games_played
-          return acc
-        }, {})
-
-        const topPlayers = Object.values(leaderboardData)
-          .sort((a, b) => b.totalGames - a.totalGames)
-          .slice(0, 5)
-
-        if (topPlayers.length === 0) return null
-
-        return (
-          <div className="bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 p-5">
-            <h3 className="flex items-center gap-2 font-bold text-slate-900 dark:text-white mb-3">
-              <Crown className="h-4 w-4 text-amber-500" />
-              Leaderboard
-            </h3>
-            <div className="space-y-2">
-              {topPlayers.map((player, i) => (
-                <div key={player.id} className="flex items-center justify-between text-sm gap-2">
-                  <div className="flex items-center gap-2 min-w-0">
-                    <span className={`w-5 h-5 rounded-full flex items-center justify-center text-[10px] font-bold shrink-0 ${i === 0 ? 'bg-amber-100 text-amber-700' :
-                      i === 1 ? 'bg-slate-200 text-slate-600' :
-                        i === 2 ? 'bg-orange-100 text-orange-700' :
-                          'bg-slate-100 text-slate-500'
-                      }`}>{i + 1}</span>
-                    <span className="font-medium text-slate-700 dark:text-slate-300 truncate">{player.name}</span>
-                  </div>
-                  <span className="text-xs text-slate-400 shrink-0">{player.totalGames} game</span>
-                </div>
-              ))}
-            </div>
-          </div>
-        )
-      })()}
     </div>
   )
 }
