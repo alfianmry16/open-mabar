@@ -8,6 +8,7 @@ import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Checkbox } from '@/components/ui/checkbox'
+import { Textarea } from '@/components/ui/textarea'
 import Link from 'next/link'
 import { MemberManagement } from './member-management'
 import {
@@ -33,6 +34,7 @@ interface Project {
   name: string
   slug: string
   game_name: string
+  description: string | null
   is_repeatable: boolean
   has_fast_track: boolean
   is_active: boolean
@@ -75,6 +77,7 @@ export function ProjectSettings({ project, initialRoles, initialMembers, initial
   const [formData, setFormData] = useState({
     name: project.name,
     gameName: project.game_name,
+    description: project.description ?? '',
     isRepeatable: project.is_repeatable,
     hasFastTrack: project.has_fast_track,
     isActive: project.is_active,
@@ -105,6 +108,7 @@ export function ProjectSettings({ project, initialRoles, initialMembers, initial
       .update({
         name: formData.name,
         game_name: formData.gameName,
+        description: formData.description.trim() || null,
         is_repeatable: formData.isRepeatable,
         has_fast_track: formData.hasFastTrack,
         is_active: formData.isActive,
@@ -238,6 +242,21 @@ export function ProjectSettings({ project, initialRoles, initialMembers, initial
                       className="h-11"
                       required
                     />
+                  </div>
+
+                  <div className="space-y-2">
+                    <Label htmlFor="description">
+                      Deskripsi <span className="text-slate-400 font-normal">(opsional)</span>
+                    </Label>
+                    <Textarea
+                      id="description"
+                      placeholder="Ceritakan tentang project/channel kamu, game yang dimainkan, jam stream, dll..."
+                      value={formData.description}
+                      onChange={(e) => setFormData({ ...formData, description: e.target.value })}
+                      rows={5}
+                      className="text-sm"
+                    />
+                    <p className="text-xs text-slate-400">{formData.description.length}/500 karakter</p>
                   </div>
 
                   <div className="space-y-4 pt-2">

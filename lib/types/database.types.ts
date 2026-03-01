@@ -86,6 +86,7 @@ export type Database = {
           name: string
           slug: string
           game_name: string
+          description: string | null
           is_repeatable: boolean
           max_games: number
           has_fast_track: boolean
@@ -99,6 +100,7 @@ export type Database = {
           name: string
           slug: string
           game_name: string
+          description?: string | null
           is_repeatable?: boolean
           max_games?: number
           has_fast_track?: boolean
@@ -112,6 +114,7 @@ export type Database = {
           name?: string
           slug?: string
           game_name?: string
+          description?: string | null
           is_repeatable?: boolean
           max_games?: number
           has_fast_track?: boolean

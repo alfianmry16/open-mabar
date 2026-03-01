@@ -37,6 +37,7 @@ export interface Project {
   name: string
   slug: string
   game_name: string
+  description: string | null
   is_repeatable: boolean
   has_fast_track: boolean
   is_active: boolean

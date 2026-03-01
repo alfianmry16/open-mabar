@@ -126,6 +126,11 @@ export function Sidebar() {
       <div className="bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 p-5">
         <h3 className="font-bold text-slate-900 dark:text-white mb-3">Info Project</h3>
         <div className="space-y-3 text-sm">
+          {project.description && (
+            <p className="text-slate-600 dark:text-slate-400 text-xs leading-relaxed pb-2 border-b border-slate-100 dark:border-slate-800 whitespace-pre-wrap">
+              {project.description}
+            </p>
+          )}
           <div className="flex justify-between">
             <span className="text-slate-500 dark:text-slate-400">Game</span>
             <span className="font-medium text-slate-900 dark:text-white">{project.game_name}</span>

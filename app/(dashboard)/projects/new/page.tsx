@@ -6,6 +6,7 @@ import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Checkbox } from '@/components/ui/checkbox'
+import { Textarea } from '@/components/ui/textarea'
 import { createClient } from '@/lib/supabase/client'
 import { generateUniqueSlug } from '@/lib/utils/slugify'
 import { ArrowLeft, Loader2, Gamepad2, Info } from 'lucide-react'
@@ -20,6 +21,7 @@ export default function NewProjectPage() {
   const [formData, setFormData] = useState({
     name: '',
     gameName: '',
+    description: '',
     isRepeatable: false,
     hasFastTrack: false,
   })
@@ -47,6 +49,7 @@ export default function NewProjectPage() {
           name: formData.name,
           slug,
           game_name: formData.gameName,
+          description: formData.description.trim() || null,
           is_repeatable: formData.isRepeatable,
           has_fast_track: formData.hasFastTrack,
         })
@@ -136,6 +139,23 @@ export default function NewProjectPage() {
                   required
                   disabled={isLoading}
                 />
+              </div>
+
+              {/* Description */}
+              <div className="space-y-2">
+                <Label htmlFor="description">
+                  Deskripsi <span className="text-slate-400 font-normal">(opsional)</span>
+                </Label>
+                <Textarea
+                  id="description"
+                  placeholder="Ceritakan tentang project/channel kamu, game yang dimainkan, jam stream, dll..."
+                  value={formData.description}
+                  onChange={(e) => setFormData({ ...formData, description: e.target.value })}
+                  rows={5}
+                  className="text-sm"
+                  disabled={isLoading}
+                />
+                <p className="text-xs text-slate-400">{formData.description.length}/500 karakter</p>
               </div>
 
               {/* Divider */}
