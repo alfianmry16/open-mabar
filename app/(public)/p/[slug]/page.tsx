@@ -1,6 +1,5 @@
 import { createClient } from '@/lib/supabase/server'
 import { notFound } from 'next/navigation'
-import Link from 'next/link'
 import { Navbar } from '@/components/Navbar'
 import { QueueManager } from '../../../(dashboard)/projects/[projectId]/queue-manager'
 import type { QueueEntry, Project, ProjectRole } from '../../../(dashboard)/projects/[projectId]/_queue/types'
@@ -45,7 +44,7 @@ export default async function PublicQueuePage({ params }: PageProps) {
   const isOwner = user?.id === project.owner_id
 
   return (
-    <div className="min-h-screen bg-slate-50">
+    <div className="min-h-screen bg-slate-50 dark:bg-slate-950 transition-colors">
       <Navbar hideAuth={true} />
 
       <QueueManager

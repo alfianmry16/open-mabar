@@ -26,15 +26,15 @@ export default async function InvitePage({ params }: PageProps) {
 
   if (inviteError || !invite) {
     return (
-      <div className="min-h-screen bg-slate-50">
+      <div className="min-h-screen bg-slate-50 dark:bg-slate-950 transition-colors">
         <Navbar />
         <div className="container mx-auto px-4 py-20 max-w-md">
-          <div className="bg-white p-8 rounded-3xl border border-slate-200 text-center shadow-sm">
-            <div className="h-16 w-16 bg-red-50 text-red-600 rounded-full flex items-center justify-center mx-auto mb-6">
+          <div className="bg-white dark:bg-slate-900 p-8 rounded-3xl border border-slate-200 dark:border-slate-800 text-center shadow-sm">
+            <div className="h-16 w-16 bg-red-50 dark:bg-red-950/50 text-red-600 dark:text-red-400 rounded-full flex items-center justify-center mx-auto mb-6">
               <AlertCircle className="h-8 w-8" />
             </div>
-            <h1 className="text-2xl font-bold text-slate-900 mb-2">Undangan Tidak Valid</h1>
-            <p className="text-slate-500 mb-8">Link undangan ini mungkin sudah kadaluarsa atau tidak ada.</p>
+            <h1 className="text-2xl font-bold text-slate-900 dark:text-white mb-2">Undangan Tidak Valid</h1>
+            <p className="text-slate-500 dark:text-slate-400 mb-8">Link undangan ini mungkin sudah kadaluarsa atau tidak ada.</p>
             <Button asChild className="w-full h-12">
               <Link href="/">Kembali ke Beranda</Link>
             </Button>
@@ -50,15 +50,15 @@ export default async function InvitePage({ params }: PageProps) {
   // Check expiry if exists
   if (inviteTyped.expires_at && new Date(inviteTyped.expires_at) < new Date()) {
     return (
-      <div className="min-h-screen bg-slate-50">
+      <div className="min-h-screen bg-slate-50 dark:bg-slate-950 transition-colors">
         <Navbar />
         <div className="container mx-auto px-4 py-20 max-w-md">
-          <div className="bg-white p-8 rounded-3xl border border-slate-200 text-center shadow-sm">
-            <div className="h-16 w-16 bg-amber-50 text-amber-600 rounded-full flex items-center justify-center mx-auto mb-6">
+          <div className="bg-white dark:bg-slate-900 p-8 rounded-3xl border border-slate-200 dark:border-slate-800 text-center shadow-sm">
+            <div className="h-16 w-16 bg-amber-50 dark:bg-amber-950/50 text-amber-600 dark:text-amber-400 rounded-full flex items-center justify-center mx-auto mb-6">
               <AlertCircle className="h-8 w-8" />
             </div>
-            <h1 className="text-2xl font-bold text-slate-900 mb-2">Undangan Kadaluarsa</h1>
-            <p className="text-slate-500 mb-8">Link ini sudah tidak berlaku lagi.</p>
+            <h1 className="text-2xl font-bold text-slate-900 dark:text-white mb-2">Undangan Kadaluarsa</h1>
+            <p className="text-slate-500 dark:text-slate-400 mb-8">Link ini sudah tidak berlaku lagi.</p>
             <Button asChild className="w-full h-12">
               <Link href="/">Kembali ke Beranda</Link>
             </Button>
@@ -71,15 +71,15 @@ export default async function InvitePage({ params }: PageProps) {
   // Check usage count
   if (inviteTyped.max_uses && (inviteTyped.uses_count || 0) >= inviteTyped.max_uses) {
     return (
-      <div className="min-h-screen bg-slate-50">
+      <div className="min-h-screen bg-slate-50 dark:bg-slate-950 transition-colors">
         <Navbar />
         <div className="container mx-auto px-4 py-20 max-w-md">
-          <div className="bg-white p-8 rounded-3xl border border-slate-200 text-center shadow-sm">
-            <div className="h-16 w-16 bg-amber-50 text-amber-600 rounded-full flex items-center justify-center mx-auto mb-6">
+          <div className="bg-white dark:bg-slate-900 p-8 rounded-3xl border border-slate-200 dark:border-slate-800 text-center shadow-sm">
+            <div className="h-16 w-16 bg-amber-50 dark:bg-amber-950/50 text-amber-600 dark:text-amber-400 rounded-full flex items-center justify-center mx-auto mb-6">
               <AlertCircle className="h-8 w-8" />
             </div>
-            <h1 className="text-2xl font-bold text-slate-900 mb-2">Kapasitas Penuh</h1>
-            <p className="text-slate-500 mb-8">Undangan ini sudah mencapai batas maksimum penggunaan.</p>
+            <h1 className="text-2xl font-bold text-slate-900 dark:text-white mb-2">Kapasitas Penuh</h1>
+            <p className="text-slate-500 dark:text-slate-400 mb-8">Undangan ini sudah mencapai batas maksimum penggunaan.</p>
             <Button asChild className="w-full h-12">
               <Link href="/">Kembali ke Beranda</Link>
             </Button>
@@ -138,46 +138,46 @@ export default async function InvitePage({ params }: PageProps) {
   }
 
   return (
-    <div className="min-h-screen bg-slate-50">
+    <div className="min-h-screen bg-slate-50 dark:bg-slate-950 transition-colors">
       <Navbar />
       <div className="container mx-auto px-4 py-20 max-w-lg">
-        <div className="bg-white p-10 rounded-[2.5rem] border border-slate-200 shadow-xl shadow-slate-200/50">
-          <div className="h-20 w-20 bg-indigo-600 text-white rounded-3xl flex items-center justify-center mb-8 shadow-lg shadow-indigo-200 rotate-3">
+        <div className="bg-white dark:bg-slate-900 p-10 rounded-[2.5rem] border border-slate-200 dark:border-slate-800 shadow-xl shadow-slate-200/50 dark:shadow-none">
+          <div className="h-20 w-20 bg-indigo-600 text-white rounded-3xl flex items-center justify-center mb-8 shadow-lg shadow-indigo-200 dark:shadow-indigo-900/30 rotate-3">
             <Shield className="h-10 w-10" />
           </div>
 
-          <h1 className="text-3xl font-extrabold text-slate-900 mb-2 leading-tight">
+          <h1 className="text-3xl font-extrabold text-slate-900 dark:text-white mb-2 leading-tight">
             Undangan Moderator
           </h1>
-          <p className="text-slate-500 mb-8 text-lg">
-            Anda diundang untuk menjadi moderator di project <span className="font-bold text-slate-800">&quot;{project?.name}&quot;</span>.
+          <p className="text-slate-500 dark:text-slate-400 mb-8 text-lg">
+            Anda diundang untuk menjadi moderator di project <span className="font-bold text-slate-800 dark:text-slate-200">&quot;{project?.name}&quot;</span>.
           </p>
 
           <div className="space-y-4 mb-10">
-            <div className="flex items-start gap-3 p-4 bg-slate-50 rounded-2xl border border-slate-100">
+            <div className="flex items-start gap-3 p-4 bg-slate-50 dark:bg-slate-800/50 rounded-2xl border border-slate-100 dark:border-slate-700">
               <CheckCircle2 className="h-5 w-5 text-emerald-500 mt-0.5 shrink-0" />
               <div>
-                <p className="font-bold text-slate-800">Kelola Antrian</p>
-                <p className="text-sm text-slate-500">Bantu streamer menarik pemain dan menyelesaikan sesi game.</p>
+                <p className="font-bold text-slate-800 dark:text-slate-200">Kelola Antrian</p>
+                <p className="text-sm text-slate-500 dark:text-slate-400">Bantu streamer menarik pemain dan menyelesaikan sesi game.</p>
               </div>
             </div>
-            <div className="flex items-start gap-3 p-4 bg-slate-50 rounded-2xl border border-slate-100">
+            <div className="flex items-start gap-3 p-4 bg-slate-50 dark:bg-slate-800/50 rounded-2xl border border-slate-100 dark:border-slate-700">
               <CheckCircle2 className="h-5 w-5 text-emerald-500 mt-0.5 shrink-0" />
               <div>
-                <p className="font-bold text-slate-800">Kontrol Real-time</p>
-                <p className="text-sm text-slate-500">Akses fitur manajemen pemain yang sinkron secara instan.</p>
+                <p className="font-bold text-slate-800 dark:text-slate-200">Kontrol Real-time</p>
+                <p className="text-sm text-slate-500 dark:text-slate-400">Akses fitur manajemen pemain yang sinkron secara instan.</p>
               </div>
             </div>
           </div>
 
           <form action={joinProject}>
-            <Button size="lg" className="w-full h-14 text-lg font-bold shadow-lg shadow-indigo-100 group">
+            <Button size="lg" className="w-full h-14 text-lg font-bold shadow-lg shadow-indigo-100 dark:shadow-indigo-900/20 group">
               {user ? 'Gabung Sekarang' : 'Login untuk Bergabung'}
               <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
             </Button>
           </form>
 
-          <p className="text-center text-xs text-slate-400 mt-6">
+          <p className="text-center text-xs text-slate-400 dark:text-slate-500 mt-6">
             Dengan bergabung, Anda menyetujui kebijakan moderator yang ditentukan oleh owner project.
           </p>
         </div>

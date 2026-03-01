@@ -70,15 +70,15 @@ export default function NewProjectPage() {
   }
 
   return (
-    <div className="min-h-screen bg-slate-50">
+    <div className="min-h-screen bg-slate-50 dark:bg-slate-950 transition-colors">
       {/* Top Nav */}
-      <nav className="bg-white border-b border-slate-200 sticky top-0 z-50">
+      <nav className="bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800 sticky top-0 z-50 transition-colors">
         <div className="container mx-auto px-4 h-16 flex items-center">
           <Link href="/" className="flex items-center gap-2.5">
             <div className="p-1.5 bg-indigo-600 rounded-lg">
               <Gamepad2 className="h-5 w-5 text-white" />
             </div>
-            <span className="text-xl font-bold text-slate-900">Mabar</span>
+            <span className="text-xl font-bold text-slate-900 dark:text-white">Mabar</span>
           </Link>
         </div>
       </nav>
@@ -93,7 +93,7 @@ export default function NewProjectPage() {
         </Button>
 
         {/* Form Card */}
-        <div className="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
+        <div className="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm overflow-hidden">
           {/* Header */}
           <div className="bg-gradient-to-r from-indigo-600 to-purple-600 px-8 py-8">
             <h1 className="text-2xl font-bold text-white">Buat Project Baru</h1>
@@ -105,8 +105,8 @@ export default function NewProjectPage() {
             <form onSubmit={handleSubmit} className="space-y-6">
               {/* Error */}
               {error && (
-                <div className="p-4 bg-red-50 border border-red-200 rounded-xl animate-fade-in">
-                  <p className="text-sm text-red-600 font-medium">{error}</p>
+                <div className="p-4 bg-red-50 dark:bg-red-950/30 border border-red-200 dark:border-red-800 rounded-xl animate-fade-in">
+                  <p className="text-sm text-red-600 dark:text-red-400 font-medium">{error}</p>
                 </div>
               )}
 
@@ -159,12 +159,12 @@ export default function NewProjectPage() {
               </div>
 
               {/* Divider */}
-              <div className="border-t border-slate-100 pt-6">
-                <h3 className="text-sm font-bold text-slate-700 uppercase tracking-wider mb-4">Pengaturan Antrian</h3>
+              <div className="border-t border-slate-100 dark:border-slate-800 pt-6">
+                <h3 className="text-sm font-bold text-slate-700 dark:text-slate-300 uppercase tracking-wider mb-4">Pengaturan Antrian</h3>
               </div>
 
               {/* Is Repeatable */}
-              <div className="flex items-start gap-4 p-4 bg-slate-50 rounded-xl border border-slate-100">
+              <div className="flex items-start gap-4 p-4 bg-slate-50 dark:bg-slate-800/50 rounded-xl border border-slate-100 dark:border-slate-700">
                 <Checkbox
                   id="isRepeatable"
                   checked={formData.isRepeatable}
@@ -184,7 +184,7 @@ export default function NewProjectPage() {
               </div>
 
               {/* Has Fast Track */}
-              <div className="flex items-start gap-4 p-4 bg-slate-50 rounded-xl border border-slate-100">
+              <div className="flex items-start gap-4 p-4 bg-slate-50 dark:bg-slate-800/50 rounded-xl border border-slate-100 dark:border-slate-700">
                 <Checkbox
                   id="hasFastTrack"
                   checked={formData.hasFastTrack}
@@ -204,11 +204,11 @@ export default function NewProjectPage() {
               </div>
 
               {/* Info Box */}
-              <div className="flex gap-3 p-4 bg-indigo-50 rounded-xl border border-indigo-100">
+              <div className="flex gap-3 p-4 bg-indigo-50 dark:bg-indigo-950/30 rounded-xl border border-indigo-100 dark:border-indigo-800">
                 <Info className="h-5 w-5 text-indigo-500 shrink-0 mt-0.5" />
                 <div>
-                  <p className="text-sm text-indigo-700 font-medium">Catatan</p>
-                  <p className="text-xs text-indigo-500 mt-1 leading-relaxed">
+                  <p className="text-sm text-indigo-700 dark:text-indigo-300 font-medium">Catatan</p>
+                  <p className="text-xs text-indigo-500 dark:text-indigo-400 mt-1 leading-relaxed">
                     Setelah project dibuat, kamu bisa menambahkan custom role (Tank, Mage, Jungler, dll) dan mengundang moderator untuk membantu mengelola antrian.
                   </p>
                 </div>
